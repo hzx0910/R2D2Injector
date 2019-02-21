@@ -23,7 +23,7 @@ dependencies {
 }
 ```
 
-Better than ButterKnife：**Bind same view type together !**
+**Better than ButterKnife : Bind same view type together !**
 ```java
 /**
  * A login screen that offers login via email/password.
@@ -59,7 +59,7 @@ public class LoginActivity extends Activity {
 }
 ```
 
-**AnnotationProcessor generate injector file!**
+**AnnotationProcessor generate injector file like this :**
 ```java
 public class LoginActivityInjector implements Injector<LoginActivity>, View.OnClickListener {
      

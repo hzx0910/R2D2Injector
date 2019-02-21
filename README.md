@@ -1,8 +1,8 @@
 # R2D2Injector
 Bind Android views and callbacks to fields and methods like **ButterKnife**
 
-Eliminate findViewById calls by using @InjectSameId on fields.
-Eliminate anonymous inner-classes for listeners by annotating methods with @OnClickSameId and others.
+Eliminate findViewById calls by using **@InjectSameId** on fields.  
+Eliminate anonymous inner-classes for listeners by annotating methods with **@OnClickSameId**.
 
 **Step 1. Add the JitPack repository to your root build.gradle:**
 ```groovy

@@ -4,6 +4,22 @@ Bind Android views and callbacks to fields and methods like **ButterKnife**
 Eliminate findViewById calls by using @InjectSameId on fields.
 Eliminate anonymous inner-classes for listeners by annotating methods with @OnClickSameId and others.
 
+Step 1. Add the JitPack repository to your root build.gradle:
+
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://www.jitpack.io' }
+		}
+	}
+	
+Step 2. Add the dependency
+
+	dependencies {
+        implementation 'com.github.hzx0910.R2D2Injector:inject-annotation:1.0.1'
+        annotationProcessor 'com.github.hzx0910.R2D2Injector:inject-compiler:1.0.1'
+    }
+	
 Better than ButterKnife：**Bind same view type together !**
 
     /**

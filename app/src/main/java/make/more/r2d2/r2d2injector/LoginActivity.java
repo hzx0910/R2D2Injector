@@ -7,7 +7,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ServiceLoader;
+
 import make.more.r2d2.annotation.InjectSameId;
+import make.more.r2d2.annotation.Injector;
 import make.more.r2d2.annotation.OnClickSameId;
 
 /**
@@ -25,6 +28,13 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         new LoginActivityInjector().inject(this);
+
+        ServiceLoader<Injector> loader = ServiceLoader.load(Injector.class);
+        text_notice.setText("");
+        for (Injector injector : loader) {
+            text_notice.append(injector.getClass().getName());
+        }
+
     }
 
     @OnClickSameId(R.class)

@@ -140,6 +140,10 @@ public class ProcessClass {
 
         TypeSpec finderClass = TypeSpec.classBuilder(className.simpleName() + "Injector")
                 .addModifiers(Modifier.PUBLIC)
+                //AutoService尝试，加了这个注解以后主工程可以通过ServiceLoader加载到Injector的所有实现
+                /*.addAnnotation(AnnotationSpec.builder(AutoService.class)
+                        .addMember("value", "$T.class", ClassName.get(Injector.class))
+                        .build())*/
                 .addSuperinterface(ParameterizedTypeName.get(ClassName.get(Injector.class), className))
                 .addSuperinterface(ONCLICK)
                 .addField(fieldTarget.build())

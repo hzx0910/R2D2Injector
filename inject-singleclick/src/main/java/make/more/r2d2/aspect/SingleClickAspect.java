@@ -5,13 +5,14 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
-import java.util.Calendar;
+import java.util.HashMap;
 
 @Aspect
 public final class SingleClickAspect {
     public static final String TAG = "SingleClickAspect";
     public static final int MIN_CLICK_DELAY_TIME = 500;
-    private static long lastClickTime;
+    //针对不同方法分辨记录最近点击时间，避免同一个注解下方法无法相互调用
+    private HashMap<String, Long> map = new HashMap<>();
 
     @Pointcut("execution(@make.more.r2d2.annotation.OnClickSameId * *(..))")
     public final void methodAnnotated() {
@@ -19,10 +20,10 @@ public final class SingleClickAspect {
 
     @Around("methodAnnotated()")
     public final void aroundJoinPoint(ProceedingJoinPoint joinPoint) {
-        Calendar calendar = Calendar.getInstance();
-        long currentTime = calendar.getTimeInMillis();
+        String key = joinPoint.toLongString();
+        long lastClickTime = map.containsKey(key) ? map.get(key) : 0;
+        long currentTime = System.currentTimeMillis();
         if (currentTime - lastClickTime > MIN_CLICK_DELAY_TIME) {
-            lastClickTime = currentTime;
             try {
                 joinPoint.proceed();
             } catch (Throwable throwable) {
@@ -31,5 +32,6 @@ public final class SingleClickAspect {
         } else {
             System.out.println("SingleClickAspect!");
         }
+        map.put(key, System.currentTimeMillis());
     }
 }

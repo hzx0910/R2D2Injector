@@ -34,7 +34,6 @@ public class LoginActivity extends Activity {
         for (Injector injector : loader) {
             text_notice.append(injector.getClass().getName());
         }
-
     }
 
     @OnClickSameId(R.class)
